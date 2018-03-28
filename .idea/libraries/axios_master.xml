@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="axios-master" type="javaScript">
+    <properties>
+      <sourceFilesUrls>
+        <item url="file://C:/axios-master" />
+      </sourceFilesUrls>
+    </properties>
+    <CLASSES>
+      <root url="file://C:/axios-master" />
+    </CLASSES>
+    <SOURCES />
+  </library>
+</component>
