@@ -7,41 +7,28 @@ class Modal extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = { isOpen: false };
-        this.state = {fService: false};
-        this.state = {sService: false};
         this.state = {fReason: 'no reason',
                         sReason: 'no reason',
+                        errorMsg: false,
                         isOpen: false,
-                        errorMsg: false};
+                        fService: false,
+                        sService: false};
     }
 
-    updateData = (value, serviceNum) => {
-        if(serviceNum==="1") {
-            this.setState({fService: value});
-        }
-        else{
-            this.setState({sService: value });
-        }
-    }
+    updateData = (value, serviceNum) =>
+        this.setState(() => (serviceNum === "1" ? {fService: value} :{sService: value}));
 
-    toggleModal = () => {
-        this.setState(
-            {isOpen: !this.state.isOpen}
-            );
-    }
 
-    reasonChange(key, e) {
+    toggleModal = () =>
+        this.setState({isOpen: !this.state.isOpen});
+
+
+    reasonChange = (key, e) => {
         const val = e.target.value;
-        if(key === "1") {
-            this.setState({fReason: val});
-        }
-        else{
-            this.setState({sReason: val});
-        }
+        this.setState(() => (key === "1" ? {fReason: val} :{sReason: val}));
     }
 
-    closeVote(){
+    closeVote = ()  => {
         if(!this.state.fService || !this.state.sService){
             alert("You need to vote for both services");
         }
@@ -58,13 +45,14 @@ class Modal extends React.Component {
             else{
                 this.toggleModal();
             }
-            this.setState({fService: false});
-            this.setState({sService: false});
-            this.forceUpdate();
+            this.setState({fService: false,
+                            sService: false,
+                            fReason: 'no reason',
+                            sReason: 'no reason'});
         }
     }
 
-    sendData(fObj, sObj){
+    sendData = (fObj, sObj) => {
         /*let request = new XMLHttpRequest();
         request.open('POST', 'url');
         request.send(fObj);
@@ -108,16 +96,14 @@ class Voting extends React.Component{
         super(props);
 
         const key = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-        const voteList = key.map((key)=> <a id={key.toString()} className="Voting" onClick={this.vote.bind(this, key)}>*</a>);
+        const voteList = key.map((key)=> <a key={key.toString()} className="Voting" onClick={this.vote.bind(this, key)}>*</a>);
         this.state = {aArr: voteList,
                       mark: false};
     }
 
-    vote(e){
-        //this.setState({ mark: (e)+"/10"});
-        this.state.mark = (e)+"/10";
-        this.props.updateData(this.state.mark, this.props.name);
-        this.forceUpdate();
+    vote = (e) => {
+        this.setState({mark: e+"/10"});
+        this.props.updateData(e+"/10", this.props.name);
     }
 
     render(){

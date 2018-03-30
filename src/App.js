@@ -7,23 +7,21 @@ class App extends React.Component {
     constructor(props) {
         super(props);
 
-        this.state = { isOpen: false };
-        this.state = {fService: false};
-        this.state = {sService: false};
-        this.state = {fReason: ""};
-        this.state = {sReason: ""};
+        this.state = { isOpen: false,
+                       fService: false,
+                       sService: false,
+                       fReason: "",
+                       sReason: ""};
     }
 
-    toggleModal = () => {
-        this.setState({
-            isOpen: !this.state.isOpen
-        });
-    }
+    toggleModal = () => this.setState({isOpen: !this.state.isOpen});
+
+
     updateData = (fValue, sValue) => {
-        this.setState({fService: "Service 1:"+fValue.mark});
-        this.setState({sService: "Service 2:"+sValue.mark});
-        this.setState({fReason: "Reason:"+fValue.reason});
-        this.setState({sReason: "Reason:"+sValue.reason});
+        this.setState({fService: "Service 1:"+fValue.mark,
+                      sService: "Service 2:"+sValue.mark,
+                      fReason: "Reason:"+fValue.reason,
+                      sReason: "Reason:"+sValue.reason});
     }
 
     render() {
